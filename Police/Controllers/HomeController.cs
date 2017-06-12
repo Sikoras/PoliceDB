@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Police.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace Police.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = Settings.Default.IslandState;
             return View();
         }
 
