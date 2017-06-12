@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Police.Models.Warrant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if (Request.IsAuthenticated)
+{
+
+<p>
+    @Html.ActionLink("Add new warrants", "Create")
+</p>
+<p>
+    @using (Html.BeginForm())
+    {
+        <p> Criminals Name: @Html.TextBox("SearchString") <br />
+        <input type="submit" value="Search" /></p>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CriminalName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crimes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilingOfficer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CriminalName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crimes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FilingOfficer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Warrant Served", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+}else
+{
+    <h4>Log in first before trying to view the warrants database.</h4>
+}

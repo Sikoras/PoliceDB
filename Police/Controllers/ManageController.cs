@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Police.Models;
+using System.Net;
+using System.Data.Entity;
 
 namespace Police.Controllers
 {
@@ -15,6 +17,7 @@ namespace Police.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
 
         public ManageController()
         {
@@ -70,7 +73,11 @@ namespace Police.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Department = HasDepartment(),
+                Rank = HasRank(),
+                isCommand = isCommand()
+
             };
             return View(model);
         }
@@ -98,13 +105,21 @@ namespace Police.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
+        public ActionResult ManageOfficers( string searchString)
+        {
+            
 
+
+            return View();
+        }
         //
         // GET: /Manage/AddPhoneNumber
         public ActionResult AddPhoneNumber()
         {
             return View();
         }
+
+        
 
         //
         // POST: /Manage/AddPhoneNumber
@@ -333,7 +348,10 @@ namespace Police.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        
+
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -372,6 +390,40 @@ namespace Police.Controllers
             }
             return false;
         }
+
+        private string HasDepartment()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if(user != null)
+            {
+                return user.Department;
+
+            }
+            return string.Empty;
+        }
+
+        private string HasRank()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.Rank;
+
+            }
+            return string.Empty;
+        }
+
+        private bool isCommand()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.isCommand;
+
+            }
+            return false;
+        }
+
 
         public enum ManageMessageId
         {

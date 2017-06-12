@@ -1,0 +1,58 @@
+﻿@model Police.Models.Criminal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Criminal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CriminalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CriminalName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfArrest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfArrest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crimes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crimes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sanction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sanction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrestingOfficer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrestingOfficer)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

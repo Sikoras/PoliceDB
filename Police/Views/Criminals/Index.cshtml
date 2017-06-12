@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Police.Models.Criminal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if (Request.IsAuthenticated)
+{
+
+<p>
+    @using (Html.BeginForm())
+    {
+        <p> Criminals Name: @Html.TextBox("SearchString") <br />
+        <input type="submit" value="Search" /></p>
+
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CriminalName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfArrest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crimes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sanction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrestingOfficer)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CriminalName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfArrest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crimes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sanction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrestingOfficer)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+    <h4>Log in first before trying to view the criminal database.</h4>
+}
