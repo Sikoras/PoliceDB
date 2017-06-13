@@ -338,6 +338,9 @@
     <Content Include="Views\Warrants\Details.cshtml" />
     <Content Include="Views\Warrants\Edit.cshtml" />
     <Content Include="Views\Warrants\Index.cshtml" />
+    <Content Include="Views\Manage\ManageOfficers.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Manage\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

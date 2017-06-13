@@ -33,5 +33,6 @@ namespace Police.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }
